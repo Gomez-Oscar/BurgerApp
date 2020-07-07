@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.practica3.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_HomeFragment_to_MenuFragment"
+            app:destination="@id/navigation_menu" />
+
+        <action
+            android:id="@+id/action_HomeFragment_to_TrackingFragment"
+            app:destination="@id/navigation_tracking" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_menu"
+        android:name="com.example.practica3.ui.menu.MenuFragment"
+        android:label="@string/title_menu"
+        tools:layout="@layout/fragment_menu">
+
+        <action
+            android:id="@+id/action_MenuFragment_to_BurgerFragment"
+            app:destination="@id/nav_burger" />
+
+        <action
+            android:id="@+id/action_MenuFragment_to_PerrosFragment"
+            app:destination="@id/nav_perros" />
+
+        <action
+            android:id="@+id/action_MenuFragment_to_ComplementosFragment"
+            app:destination="@id/nav_complementos" />
+
+        <action
+            android:id="@+id/action_MenuFragment_to_BebidasFragment"
+            app:destination="@id/nav_bebidas" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_tracking"
+        android:name="com.example.practica3.ui.tracking.TrackingFragment"
+        android:label="@string/title_tracking"
+        tools:layout="@layout/fragment_tracking" />
+
+    <fragment
+        android:id="@+id/navigation_carrito"
+        android:name="com.example.practica3.ui.carrito.CarritoFragment"
+        android:label="@string/title_carrito"
+        tools:layout="@layout/fragment_carrito">
+
+        <action
+            android:id="@+id/action_CarritoFragment_to_DetallesFragment"
+            app:destination="@id/nav_detalles" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_burger"
+        android:name="com.example.practica3.ui.menu.BurgerFragment"
+        android:label="@string/label_burger"
+        tools:layout="@layout/fragment_burger" />
+
+    <fragment
+        android:id="@+id/nav_perros"
+        android:name="com.example.practica3.ui.menu.PerrosFragment"
+        android:label="@string/label_perros"
+        tools:layout="@layout/fragment_perros" />
+
+    <fragment
+        android:id="@+id/nav_complementos"
+        android:name="com.example.practica3.ui.menu.ComplementosFragment"
+        android:label="@string/label_complementos"
+        tools:layout="@layout/fragment_complementos" />
+
+    <fragment
+        android:id="@+id/nav_bebidas"
+        android:name="com.example.practica3.ui.menu.BebidasFragment"
+        android:label="@string/label_bebidas"
+        tools:layout="@layout/fragment_bebidas" />
+
+    <fragment
+        android:id="@+id/nav_detalles"
+        android:name="com.example.practica3.ui.carrito.DetallesFragment"
+        android:label="@string/label_detalles"
+        tools:layout="@layout/fragment_detalles">
+
+        <action
+            android:id="@+id/action_DetallesFragment_to_PedidoRealizadoFragment"
+            app:destination="@id/nav_pedido_realizado" />
+        <action
+            android:id="@+id/action_DetallesFragment_to_DireccionFragment"
+            app:destination="@id/nav_direccion" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_pedido_realizado"
+        android:name="com.example.practica3.ui.carrito.PedidoRealizadoFragment"
+        android:label="@string/label_pedido"
+        tools:layout="@layout/fragment_pedido_realizado" />
+
+    <fragment
+        android:id="@+id/nav_direccion"
+        android:name="com.example.practica3.ui.carrito.DireccionFragment"
+        android:label="@string/label_direccion"
+        tools:layout="@layout/fragment_direccion" />
+
+</navigation>

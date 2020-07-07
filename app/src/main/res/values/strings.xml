@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">Practica 3</string>
+    <string name="titulo">Registro de cuenta</string>
+    <string name="nombre">Nombre:</string>
+    <string name="correo">Correo electrónico:</string>
+    <string name="contrasena">Contraseña: Mínimo 6 dígtos</string>
+    <string name="contrasenax2">Repetir Contraseña:</string>
+    <string name="telefono">Teléfono:</string>
+    <string name="sexo">Sexo:</string>
+    <string name="masculino">Masculino</string>
+    <string name="femenino">Femenino</string>
+    <string name="hobbies">Seleccione sus Hobbies</string>
+    <string name="bicicleta">Montar en bicicleta</string>
+    <string name="futbol">Jugar fútbol</string>
+    <string name="guitarra">Tocar guitarra</string>
+    <string name="saltar">Practicar bungee jumping</string>
+    <string name="guardar">Registrar</string>
+    <string name="lugar">Ciudad de nacimiento</string>
+    <string name="fecha_nacimiento">MM/dd/yyyy</string>
+    <string name="fecha_nacimiento_lb">Fecha de Nacimiento</string>
+    <string name="burguer_app">Burger App</string>
+    <string name="todo">TODO</string>
+    <string name="hint_contrasena">Mínimo 6 dígitos</string>
+    <string name="titulo_login">INICIA SESIÓN A TU CUENTA</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="no_tienes_cuenta">¿No tienes una cuenta?</string>
+    <string name="crear_cuenta">"Crear cuenta "</string>
+    <string name="contrasena_login">Contraseña:</string>
+    <string name="titulo_main">Correo electrónico registrado</string>
+    <string name="menu_cerrar_sesion">Cerrar Sesión</string>
+    <string name="menu_mi_cuenta">Mi Cuenta</string>
+    <string name="menu_whatsapp">Linea de ayuda WhatsApp</string>
+
+
+    <string-array name="ciudades">
+        <item>Bogotá</item>
+        <item>Medellín</item>
+        <item>Pereira</item>
+        <item>Manizales</item>
+        <item>Bucaramanga</item>
+    </string-array>
+
+    <string name="title_activity_botttom_navigation">MainActivity</string>
+    <string name="title_home">HOME</string>
+    <string name="title_menu">MENÚ</string>
+    <string name="title_tracking">TRACKING</string>
+    <string name="title_carrito">CARRITO</string>
+
+    <string name="titulo_home">BIENVENIDO A BURGER APP</string>
+    <string name="boton_menu">IR AL MENÚ</string>
+    <string name="boton_tracking">SIGUE TU PEDIDO</string>
+
+    <string name="label_burger">HAMBURGUESAS</string>
+    <string name="label_perros">PERROS</string>
+    <string name="label_complementos">COMPLEMENTOS</string>
+    <string name="label_bebidas">BEBIDAS</string>
+    <string name="label_detalles">DETALLES</string>
+    <string name="label_pedido">COMPRA EXITOSA</string>
+    <string name="label_direccion">DIRECCIÓN</string>
+    <string name="label_mi_cuenta">MI CUENTA</string>
+    <string name="label_editar">EDITAR CUENTA</string>
+    <string name="label_login">INICIAR SESIÓN</string>
+    <string name="label_crear_cuenta">CREAR CUENTA</string>
+
+
+
+    <string name="info_home">Este es el fragmento encargado de darle la bienvenida al usuario, en este el usuario se puede dirigir a menu o a tracking</string>
+    <string name="info_tracking">Se realizara el tracking de los pedidos utilizando un codigo de seguimiento</string>
+    <string name="info_menu">El usuario puede ver los diferentes submenus disponibles y acceder a ellos</string>
+    <string name="info_carrito">El usuario puede ver los productos que han sido añadidos al carrito asi como una cantidad modificable del producto, la opción de quitar el producto y el subtotal</string>
+    <string name="info_burger">Se puede ver el menú hamburguesas, una breve descripción, sus precios y el botón añadir al carrito</string>
+    <string name="info_perros">Se puede ver el menú perros, una breve descripción, sus precios y el botón añadir al carrito</string>
+    <string name="info_complementos">Se puede ver el menú complementos, una breve descripción, sus precios y el botón añadir al carrito</string>
+    <string name="info_bebidas">Se puede ver el menú bebidas, una breve descripción, sus precios y el botón añadir al carrito</string>
+    <string name="info_detalles">Se pueden ver los detalles de la compra, metodo de servicio, ubicación de la tienda y del cliente, metodo de pago y total a pagar</string>
+    <string name="info_pedido_realizdo">se ven los productos comprados con sus precios y un codigo de seguimiento del pedido</string>
+    <string name="info_direccion">el usuario debe introducir la nueva dirección de entrega, el nombre de la persona que recibe y el telefono de esta</string>
+    <string name="info_mi_cuenta">El usuario puede ver sus datos</string>
+    <string name="info_editar">El usuario puede editar sus datos</string>
+
+    <string name="continuar">CONTINUAR</string>
+    <string name="finalizar">FINALIZAR PEDIDO</string>
+    <string name="cambiar_direccion">CAMBIAR DIRECCIÓN</string>
+
+</resources>
