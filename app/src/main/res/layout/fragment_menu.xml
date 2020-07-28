@@ -1,127 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    tools:context=".ui.menu.MenuFragment">
+    android:scrollbars="none">
 
-    <ImageView
-        android:id="@+id/iv_burger"
-        android:layout_width="104dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/todo"
-        android:src="@drawable/mexicana"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/bt_burger"
-        android:layout_width="218dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#F56C57"
-        android:text="@string/label_burger"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.126"
-        app:layout_constraintStart_toEndOf="@+id/iv_burger"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv_perro"
-        android:layout_width="104dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@string/todo"
-        android:src="@drawable/perro_mexicano"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_burger" />
-
-    <Button
-        android:id="@+id/bt_perros"
-        android:layout_width="218dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="#F56C57"
-        android:text="@string/label_perros"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.126"
-        app:layout_constraintStart_toEndOf="@+id/iv_perro"
-        app:layout_constraintTop_toBottomOf="@+id/bt_burger" />
-
-    <ImageView
-        android:id="@+id/iv_complementos"
-        android:layout_width="104dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@string/todo"
-        android:src="@drawable/papas_churros"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_perro" />
-
-    <Button
-        android:id="@+id/bt_complementos"
-        android:layout_width="218dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="#F56C57"
-        android:text="@string/label_complementos"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.126"
-        app:layout_constraintStart_toEndOf="@+id/iv_complementos"
-        app:layout_constraintTop_toBottomOf="@+id/bt_perros" />
-
-    <ImageView
-        android:id="@+id/iv_bebidas"
-        android:layout_width="104dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@string/todo"
-        android:src="@drawable/agua_h2o"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_complementos" />
-
-    <Button
-        android:id="@+id/bt_bebidas"
-        android:layout_width="218dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="#F56C57"
-        android:text="@string/label_bebidas"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.126"
-        app:layout_constraintStart_toEndOf="@+id/iv_bebidas"
-        app:layout_constraintTop_toBottomOf="@+id/bt_complementos" />
-
-    <TextView
-        android:id="@+id/tv_info_menu"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/info_menu"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_bebidas" />
+        android:orientation="vertical"
+        tools:context=".ui.menu.MenuFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_burger"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/courgette"
+            android:text="@string/menu_hamburguesas"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_burger"
+            android:layout_width="match_parent"
+            android:layout_height="152dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/burger_menu" />
+
+        <TextView
+            android:id="@+id/tv_perros"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/courgette"
+            android:text="@string/menu_perros"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_perros"
+            android:layout_width="match_parent"
+            android:layout_height="152dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/perros_menu" />
+
+        <TextView
+            android:id="@+id/rv_complementos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/courgette"
+            android:text="@string/menu_complementos"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_complementos"
+            android:layout_width="match_parent"
+            android:layout_height="152dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/complementos_menu" />
+
+        <TextView
+            android:id="@+id/tv_bebidas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/courgette"
+            android:text="@string/menu_bebidas"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv_bebidas"
+            android:layout_width="match_parent"
+            android:layout_height="152dp"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/bebidas_menu" />
+
+    </LinearLayout>
+</ScrollView>

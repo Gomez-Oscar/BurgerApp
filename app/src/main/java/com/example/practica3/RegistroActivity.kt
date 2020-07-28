@@ -1,99 +1,140 @@
 package com.example.practica3
-import android.app.Activity
-import android.app.DatePickerDialog
-import android.content.Intent
+
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.practica3.ui.model.Usuario
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_registro.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 class RegistroActivity : AppCompatActivity() {
-
-    private var fecha = ""
-    private var cal = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
 
-        val dateSetListener =
-            DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                cal.set(Calendar.YEAR, year)
-                cal.set(Calendar.MONTH, month)
-                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-                val format = "MM/dd/yyyy"
-                val simpleDateFormat = SimpleDateFormat(format, Locale.US)
-                fecha = simpleDateFormat.format(cal.time).toString()
-                tv_fecha_nacimiento.text = fecha
-            }
-
-        ibt_calendario.setOnClickListener {
-
-            DatePickerDialog(
-                this,
-                dateSetListener,
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.MONTH),
-                cal.get(Calendar.DAY_OF_MONTH)
-            ).show()
-        }
+        val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
         bt_guardar.setOnClickListener {
 
-            val nombre = et_nombre.text.toString()
-            val correo = et_correo.text.toString()
+            val nombres = et_nombre.text.toString()
+            val apellidos = et_apellido.text.toString()
+            val cedula = et_cedula.text.toString()
             val telefono = et_telefono.text.toString()
-            val contrasena = et_contrasena.text.toString()
-            val contrasenax2 = et_contrasenax2.text.toString()
-            val genero = if (rb_masculino.isChecked) "Masculino" else "Femenino"
-            var hobbies = ""
             val ciudad = sp_ciudad.selectedItem.toString()
+            val direccion = et_direccion.text.toString()
+            val email = et_correo.text.toString()
+            val password = et_contrasena.text.toString()
+            val contrasenax2 = et_contrasenax2.text.toString()
 
-            if (cb_hobbie1.isChecked) hobbies = "$hobbies Montar en bicicleta"
-            if (cb_hobbie2.isChecked) hobbies = "$hobbies Jugar fútbol"
-            if (cb_hobbie3.isChecked) hobbies = "$hobbies Tocar guitarra"
-            if (cb_hobbie4.isChecked) hobbies = "$hobbies Practicar bungee jumping"
+            if (nombres.isEmpty() || nombres.isBlank()) {
+                showMessage("Ingrese al menos un nombre")
 
+            } else if (apellidos.isEmpty() || apellidos.isBlank()) {
+                showMessage("Ingrese sus apellidos")
 
-            if (contrasena == contrasenax2) {
-                if (nombre.isEmpty() || nombre.isBlank()) {
-                    Toast.makeText(this, "Ingrese un nombre", Toast.LENGTH_SHORT).show()
-                } else if (correo.isEmpty() || correo.isBlank()) {
-                    Toast.makeText(this, "Ingrese un correo electrónico", Toast.LENGTH_SHORT).show()
-                } else if (telefono.isEmpty() || telefono.isBlank()) {
-                    Toast.makeText(this, "Ingrese un teléfono", Toast.LENGTH_SHORT).show()
-                } else if (contrasena.isEmpty() || contrasena.isBlank()) {
-                    Toast.makeText(this, "Ingrese una contraseña", Toast.LENGTH_SHORT).show()
-                } else if (contrasena.length < 6) {
-                    Toast.makeText(
-                        this,
-                        "La contraseña debe tener mínimo 6 dígitos",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else if (ciudad.isEmpty()) {
-                    Toast.makeText(this, "Ingrese una ciudad de nacimiento", Toast.LENGTH_SHORT)
-                        .show()
-                } else if (fecha.isEmpty()) {
-                    Toast.makeText(this, "Ingrese una fecha de nacimiento", Toast.LENGTH_SHORT)
-                        .show()
-                } else {
+            } else if (cedula.isEmpty() || cedula.isBlank()) {
+                showMessage("Ingrese su cédula")
 
-                    val intent = Intent()
-                    intent.putExtra("correo", et_correo.text.toString())
-                    intent.putExtra("contraseña", et_contrasena.text.toString())
-                    setResult(Activity.RESULT_OK,intent)
-                    finish()
-                }
+            } else if (telefono.isEmpty() || telefono.isBlank()) {
+                showMessage("Ingrese un teléfono")
+
+            } else if (ciudad == "Ciudad") {
+                showMessage("Escoja una ciudad")
+
+            } else if (direccion.isEmpty() || direccion.isBlank()) {
+                showMessage("Ingrese  una dirección")
+
+            }  else if (email.isEmpty() || email.isBlank()) {
+                showMessage("Ingrese un correo electrónico")
+
+            } else if (password.isEmpty() || password.isBlank()) {
+                showMessage("Ingrese una contraseña")
+
+            } else if (password != contrasenax2) {
+                showMessage("La contraseñas NO coniciden")
 
             } else {
-                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+
+                mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(
+                        this
+                    ) { task ->
+                        if (task.isSuccessful) {
+                            crearUsuarioEnBaseDeDatos(
+                                nombres,
+                                apellidos,
+                                cedula,
+                                telefono,
+                                ciudad,
+                                direccion,
+                                email
+                            )
+                            onBackPressed()
+                        } else {
+
+                            val errorCode =
+                                (task.exception as FirebaseAuthException?)!!.errorCode
+
+                            when (errorCode) {
+                                "ERROR_EMAIL_ALREADY_IN_USE"
+                                -> showMessage("El correo ingresado ya esta registrado")
+
+                                "ERROR_INVALID_EMAIL"
+                                -> showMessage("El correo ingresado esta mal escrito")
+
+                                "ERROR_WEAK_PASSWORD"
+                                -> showMessage("La contraseña debe tener minimo 6 digitos")
+                            }
+
+                            /*Toast.makeText(
+                                this, errorCode,
+                                Toast.LENGTH_SHORT
+                            ).show()*/
+                        }
+                    }
+
             }
 
         }
 
+    }
+
+    private fun crearUsuarioEnBaseDeDatos(
+        nombres: String,
+        apellidos: String,
+        cedula: String,
+        telefono: String,
+        ciudad: String,
+        direccion: String,
+        email: String
+    ) {
+
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+        val myRef: DatabaseReference = database.getReference("usuarios")
+        val id = myRef.push().key
+
+        val usuario = Usuario(
+            id,
+            nombres,
+            apellidos,
+            cedula,
+            telefono,
+            ciudad,
+            direccion,
+            email
+        )
+        if (id != null) {
+            myRef.child(id).setValue(usuario)
+            showMessage("Registro Exitoso")
+        }
+    }
+
+    private fun showMessage(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
 }

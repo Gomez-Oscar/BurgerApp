@@ -20,21 +20,23 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bt_burger.setOnClickListener {
+        iv_burger.setOnClickListener{
             findNavController().navigate(R.id.action_MenuFragment_to_BurgerFragment)
+
         }
 
-        bt_perros.setOnClickListener {
+        iv_perros.setOnClickListener {
             findNavController().navigate(R.id.action_MenuFragment_to_PerrosFragment)
         }
 
-        bt_complementos.setOnClickListener {
+        iv_complementos.setOnClickListener {
                 findNavController().navigate(R.id.action_MenuFragment_to_ComplementosFragment)
         }
 
-        bt_bebidas.setOnClickListener {
+        iv_bebidas.setOnClickListener {
             findNavController().navigate(R.id.action_MenuFragment_to_BebidasFragment)
         }
 
     }
+
 }

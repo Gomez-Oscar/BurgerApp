@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.practica3.R
 import kotlinx.android.synthetic.main.fragment_carrito.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class CarritoFragment : Fragment() {
 

@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_overflow_MainActivity"
-        android:title="@string/menu_cerrar_sesion" />
-
-    <item
         android:id="@+id/menu_overflow_mi_cuenta"
         android:title="@string/menu_mi_cuenta" />
 
     <item
         android:id="@+id/menu_overflow_whatsapp"
         android:title="@string/menu_whatsapp" />
+
+    <item
+        android:id="@+id/menu_overflow_log_in_out"
+        android:title="@string/menu_cerrar_sesion" />
 
 </menu>

@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.practica3.R
-import kotlinx.android.synthetic.main.fragment_carrito.*
 import kotlinx.android.synthetic.main.fragment_detalles.*
 
 class DetallesFragment : Fragment() {
+
+    //private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -23,6 +24,14 @@ class DetallesFragment : Fragment() {
 
         bt_finalizar.setOnClickListener {
             findNavController().navigate(R.id.action_DetallesFragment_to_PedidoRealizadoFragment)
+
+            /*val userMail = mAuth.currentUser?.email
+            val mailIntent = Intent(Intent.ACTION_VIEW)
+            val data = Uri.parse("mailto:? subject = subject text &body = body text &to=$userMail")
+            mailIntent.data = data
+            startActivity(Intent.createChooser(mailIntent, "Send mail..."))*/
+
+
         }
 
         bt_cambiar_dir.setOnClickListener {

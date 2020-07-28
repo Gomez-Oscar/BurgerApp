@@ -28,7 +28,7 @@
 
         <action
             android:id="@+id/action_MenuFragment_to_BurgerFragment"
-            app:destination="@id/nav_burger" />
+            app:destination="@id/nav_hamburguesas" />
 
         <action
             android:id="@+id/action_MenuFragment_to_PerrosFragment"
@@ -51,7 +51,7 @@
         tools:layout="@layout/fragment_tracking" />
 
     <fragment
-        android:id="@+id/navigation_carrito"
+        android:id="@+id/navigation_car"
         android:name="com.example.practica3.ui.carrito.CarritoFragment"
         android:label="@string/title_carrito"
         tools:layout="@layout/fragment_carrito">
@@ -61,30 +61,6 @@
             app:destination="@id/nav_detalles" />
 
     </fragment>
-
-    <fragment
-        android:id="@+id/nav_burger"
-        android:name="com.example.practica3.ui.menu.BurgerFragment"
-        android:label="@string/label_burger"
-        tools:layout="@layout/fragment_burger" />
-
-    <fragment
-        android:id="@+id/nav_perros"
-        android:name="com.example.practica3.ui.menu.PerrosFragment"
-        android:label="@string/label_perros"
-        tools:layout="@layout/fragment_perros" />
-
-    <fragment
-        android:id="@+id/nav_complementos"
-        android:name="com.example.practica3.ui.menu.ComplementosFragment"
-        android:label="@string/label_complementos"
-        tools:layout="@layout/fragment_complementos" />
-
-    <fragment
-        android:id="@+id/nav_bebidas"
-        android:name="com.example.practica3.ui.menu.BebidasFragment"
-        android:label="@string/label_bebidas"
-        tools:layout="@layout/fragment_bebidas" />
 
     <fragment
         android:id="@+id/nav_detalles"
@@ -112,5 +88,31 @@
         android:name="com.example.practica3.ui.carrito.DireccionFragment"
         android:label="@string/label_direccion"
         tools:layout="@layout/fragment_direccion" />
+
+    <fragment
+        android:id="@+id/nav_hamburguesas"
+        android:name="com.example.practica3.ui.list.hamburguesas.ListHamburguesas"
+        android:label="@string/label_hamburguesas"
+        tools:layout="@layout/hamburguesas_list" />
+    <fragment
+        android:id="@+id/nav_perros"
+        android:name="com.example.practica3.ui.list.perros.ListPerros"
+        android:label="@string/label_perros"
+        tools:layout="@layout/perros_list"/>
+    <fragment
+        android:id="@+id/nav_complementos"
+        android:name="com.example.practica3.ui.list.complementos.ListComplementos"
+        android:label="@string/label_complementos"
+        tools:layout="@layout/complementos_list" />
+    <fragment
+        android:id="@+id/nav_bebidas"
+        android:name="com.example.practica3.ui.list.bebidas.ListBebidas"
+        android:label="@string/label_bebidas"
+        tools:layout="@layout/bebidas_list" />
+    <fragment
+        android:id="@+id/navigation_carrito"
+        android:name="com.example.practica3.ui.list.compras.ListCompras"
+        android:label="@string/title_carrito"
+        tools:layout="@layout/compras_list" />
 
 </navigation>

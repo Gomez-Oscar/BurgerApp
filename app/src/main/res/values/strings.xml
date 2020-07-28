@@ -1,28 +1,23 @@
 <resources>
-    <string name="app_name">Practica 3</string>
-    <string name="titulo">Registro de cuenta</string>
-    <string name="nombre">Nombre:</string>
+    <string name="app_name">Burger App</string>
+    <string name="titulo">REGISTRO DE CUENTA</string>
+    <string name="nombre">Nombres:</string>
+    <string name="apellido">Apellidos:</string>
+    <string name="cedula">Cédula:</string>
+    <string name="ciudad">Ciudad:</string>
+    <string name="direccion">Dirección:</string>
     <string name="correo">Correo electrónico:</string>
     <string name="contrasena">Contraseña: Mínimo 6 dígtos</string>
     <string name="contrasenax2">Repetir Contraseña:</string>
-    <string name="telefono">Teléfono:</string>
-    <string name="sexo">Sexo:</string>
-    <string name="masculino">Masculino</string>
-    <string name="femenino">Femenino</string>
-    <string name="hobbies">Seleccione sus Hobbies</string>
-    <string name="bicicleta">Montar en bicicleta</string>
-    <string name="futbol">Jugar fútbol</string>
-    <string name="guitarra">Tocar guitarra</string>
-    <string name="saltar">Practicar bungee jumping</string>
+    <string name="celular">Teléfono movil:</string>
     <string name="guardar">Registrar</string>
-    <string name="lugar">Ciudad de nacimiento</string>
-    <string name="fecha_nacimiento">MM/dd/yyyy</string>
-    <string name="fecha_nacimiento_lb">Fecha de Nacimiento</string>
     <string name="burguer_app">Burger App</string>
     <string name="todo">TODO</string>
     <string name="hint_contrasena">Mínimo 6 dígitos</string>
-    <string name="titulo_login">INICIA SESIÓN A TU CUENTA</string>
     <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="contrasena_olvidada">Olvidé mi contraseña</string>
+    <string name="ingrese_correo">Ingrese su correo electrónico</string>
+    <string name="enviar_correo">ENVIAR</string>
     <string name="no_tienes_cuenta">¿No tienes una cuenta?</string>
     <string name="crear_cuenta">"Crear cuenta "</string>
     <string name="contrasena_login">Contraseña:</string>
@@ -31,13 +26,13 @@
     <string name="menu_mi_cuenta">Mi Cuenta</string>
     <string name="menu_whatsapp">Linea de ayuda WhatsApp</string>
 
-
     <string-array name="ciudades">
-        <item>Bogotá</item>
-        <item>Medellín</item>
-        <item>Pereira</item>
-        <item>Manizales</item>
-        <item>Bucaramanga</item>
+        <item>Ciudad</item>
+        <item>Rionegro</item>
+        <item>Marinilla</item>
+        <item>La Ceja</item>
+        <item>El Santuario</item>
+        <item>El Carmen</item>
     </string-array>
 
     <string name="title_activity_botttom_navigation">MainActivity</string>
@@ -45,12 +40,9 @@
     <string name="title_menu">MENÚ</string>
     <string name="title_tracking">TRACKING</string>
     <string name="title_carrito">CARRITO</string>
+    <string name="titulo_home">Bienvenido a Burger App</string>
 
-    <string name="titulo_home">BIENVENIDO A BURGER APP</string>
-    <string name="boton_menu">IR AL MENÚ</string>
-    <string name="boton_tracking">SIGUE TU PEDIDO</string>
-
-    <string name="label_burger">HAMBURGUESAS</string>
+    <string name="label_hamburguesas">HAMBURGUESAS</string>
     <string name="label_perros">PERROS</string>
     <string name="label_complementos">COMPLEMENTOS</string>
     <string name="label_bebidas">BEBIDAS</string>
@@ -61,8 +53,7 @@
     <string name="label_editar">EDITAR CUENTA</string>
     <string name="label_login">INICIAR SESIÓN</string>
     <string name="label_crear_cuenta">CREAR CUENTA</string>
-
-
+    <string name="label_restablecer_password">RECUPERAR PASSWORD</string>
 
     <string name="info_home">Este es el fragmento encargado de darle la bienvenida al usuario, en este el usuario se puede dirigir a menu o a tracking</string>
     <string name="info_tracking">Se realizara el tracking de los pedidos utilizando un codigo de seguimiento</string>
@@ -81,5 +72,29 @@
     <string name="continuar">CONTINUAR</string>
     <string name="finalizar">FINALIZAR PEDIDO</string>
     <string name="cambiar_direccion">CAMBIAR DIRECCIÓN</string>
+
+    <string name="mexicana">PAPAS A LA FRANCESA</string>
+    <string name="descripcion_mexicana">125 gramos de carne de res, queso americano, guacamole, fríjol refrito, verduras y mayonesa.</string>
+    <string name="precio_mexicana">$16000</string>
+    <string name="bt_anadir">Añadir al carrito</string>
+    <string name="info">info de firebase</string>
+    <string name="bt_guardar_cambios">GUARDAR CAMBIOS</string>
+    <string name="nueva_contrasena">Nueva contraseña:</string>
+    <string name="hint_nueva_contrasena">Ingrese solo si desea cambiarla</string>
+    <string name="ingrese_contrasena">Ingrese su contraseña actual para guardar cambios</string>
+
+    <string name="menu_hamburguesas">Hamburguesas</string>
+    <string name="menu_perros">Perros</string>
+    <string name="menu_complementos">Complementos</string>
+    <string name="menu_bebidas">Bebidas</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="numero">15</string>
+    <string name="peso">$</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="carrito_vacio">Tu carrito de compras está vacío</string>
+
+
+
+
 
 </resources>
