@@ -113,6 +113,10 @@
         android:id="@+id/navigation_carrito"
         android:name="com.example.practica3.ui.list.compras.ListCompras"
         android:label="@string/title_carrito"
-        tools:layout="@layout/compras_list" />
+        tools:layout="@layout/compras_list" >
+        <action
+            android:id="@+id/action_navigation_carrito_to_nav_detalles"
+            app:destination="@id/nav_detalles" />
+    </fragment>
 
 </navigation>

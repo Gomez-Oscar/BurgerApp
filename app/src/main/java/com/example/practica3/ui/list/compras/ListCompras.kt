@@ -1,25 +1,25 @@
 package com.example.practica3.ui.list.compras
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practica3.R
+import com.example.practica3.ui.carrito.DetallesActivity
 import com.example.practica3.ui.model.Compras
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.compras_list.*
 
 class ListCompras : Fragment() {
 
     private var comprasList: MutableList<Compras> = mutableListOf()
     lateinit var comprasRVAdapter: ComprasRVAdapter
+    val database = FirebaseDatabase.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,12 +48,22 @@ class ListCompras : Fragment() {
         tv_carrito_vacio.visibility = View.GONE
 
         cargarCompras()
+        subTotal()
+
+        bt_continuar.setOnClickListener {
+            if (tv_valor_subtotal.text.toString() != "0") {
+                val subtotal = tv_valor_subtotal.text.toString().toLong()
+                val intent = Intent(context, DetallesActivity::class.java)
+                intent.putExtra("subtotal", subtotal)
+                startActivity(intent)
+            }
+        }
+
 
     }
 
     private fun cargarCompras() {
 
-        val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("compras")
 
         val postListener = object : ValueEventListener {
@@ -65,8 +75,8 @@ class ListCompras : Fragment() {
                 }
                 comprasRVAdapter.notifyDataSetChanged()
 
-                /*if(!snapshot.exists()){
-                    linear.visibility = View.INVISIBLE
+                /*if (!snapshot.exists()) {
+                    linear.visibility = View.GONE
                     tv_carrito_vacio.visibility = View.VISIBLE
                 }*/
 
@@ -75,11 +85,25 @@ class ListCompras : Fragment() {
             override fun onCancelled(error: DatabaseError) {}
         }
         myRef.addValueEventListener(postListener)
-
     }
 
-    private fun showMessage(msg: String) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+    private fun subTotal() {
+
+        val myRef: DatabaseReference = database.getReference("compras")
+        var acumulado = 0L
+
+        val postListener = object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {}
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (datasnapshot: DataSnapshot in snapshot.children) {
+                    val compra = datasnapshot.getValue(Compras::class.java)
+                    acumulado += compra!!.precio
+                    tv_valor_subtotal.text = "$acumulado"
+                }
+                Log.d("valor", "$acumulado")
+            }
+        }
+        myRef.addListenerForSingleValueEvent(postListener)
     }
 
 }

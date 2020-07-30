@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.item_producto.view.*
 // setear la info en la interfaz de usuario
 
 //1
+
 class HamburguesasRVAdapter(
     private var hamburguesasList: ArrayList<Hamburguesas>
 ) : RecyclerView.Adapter<HamburguesasRVAdapter.HamburguesasViewHolder>() {
@@ -24,17 +25,16 @@ class HamburguesasRVAdapter(
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     var idCompra: String? = ""
     var idConteo: String? = ""
-    var cant = 0
-
-    var c = 0
 
     //3
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): HamburguesasViewHolder {
+
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.item_producto, parent, false)
+
         return HamburguesasViewHolder(
             itemView
         )
@@ -48,13 +48,12 @@ class HamburguesasRVAdapter(
         holder: HamburguesasViewHolder,
         position: Int
     ) {
+
         val hamburguesa: Hamburguesas = hamburguesasList[position]
         holder.bindHamburguesa(hamburguesa)
 
         holder.itemView.bt_anadir.setOnClickListener {
             crearCompra(hamburguesa)
-            c = contarCompras()
-            crearConteo(c)
         }
     }
 
@@ -75,6 +74,7 @@ class HamburguesasRVAdapter(
 
         val myRef: DatabaseReference = database.getReference("compras")
         var compraExiste = false
+        var cant = 0
 
         val postListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
@@ -99,6 +99,7 @@ class HamburguesasRVAdapter(
                         1
                     )
                     myRef.child(id!!).setValue(compra)
+                    sumarConteo()
 
                 } else {
                     val childUpdate = HashMap<String, Any>()
@@ -111,33 +112,13 @@ class HamburguesasRVAdapter(
         myRef.addListenerForSingleValueEvent(postListener)
     }
 
-    private fun contarCompras(): Int {
-
-        val myRef: DatabaseReference = database.getReference("compras")
-        var cont = 1
-
-        val postListener = object : ValueEventListener {
-            override fun onCancelled(error: DatabaseError) {}
-            override fun onDataChange(snapshot: DataSnapshot) {
-                var contint = 0
-                for (datasnapshot: DataSnapshot in snapshot.children) {
-                    contint += 1
-                    cont = contint
-                }
-            }
-
-        }
-        myRef.addListenerForSingleValueEvent(postListener)
-        Log.d("conteo", "$cont")
-        return cont
-    }
-
-    private fun crearConteo(contador: Int) {
+    private fun sumarConteo() {
 
         val myRef: DatabaseReference = database.getReference("conteocompras")
         var compraExiste = false
+        var contadorAct = 0
 
-        val postListener2 = object : ValueEventListener {
+        val postListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (datasnapshot: DataSnapshot in snapshot.children) {
@@ -145,34 +126,22 @@ class HamburguesasRVAdapter(
                     if (snapshot.exists()) {
                         compraExiste = true
                         idConteo = conteo?.id
+                        contadorAct = conteo?.cont!!
                     }
                 }
                 if (!compraExiste) {
                     val id = myRef.push().key
-                    val conteo = Conteo(
-                        id,
-                        1
-                    )
+                    val conteo = Conteo(id, 1)
                     myRef.child(id!!).setValue(conteo)
                 } else {
                     val childUpdate = HashMap<String, Any>()
-                    childUpdate["cont"] = contador
+                    childUpdate["cont"] = contadorAct + 1
                     myRef.child(idConteo!!).updateChildren(childUpdate)
+                    Log.d("contador firebase", contadorAct.toString())
                 }
             }
         }
-        myRef.addListenerForSingleValueEvent(postListener2)
+        myRef.addListenerForSingleValueEvent(postListener)
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-

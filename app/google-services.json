@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "401912838901",
+    "firebase_url": "https://burger-app-13d44.firebaseio.com",
+    "project_id": "burger-app-13d44",
+    "storage_bucket": "burger-app-13d44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401912838901:android:825c8b7f43f3d3063063bc",
+        "android_client_info": {
+          "package_name": "com.example.practica3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401912838901-0eugqbc7unctbhfntjusg6jl4njolf0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7zzutTPNSyCDgZZvVtu8qEg9tlVLMsWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401912838901-0eugqbc7unctbhfntjusg6jl4njolf0u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

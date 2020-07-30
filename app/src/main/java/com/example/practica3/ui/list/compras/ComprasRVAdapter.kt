@@ -10,7 +10,9 @@ import com.example.practica3.ui.model.Compras
 import com.example.practica3.ui.model.Conteo
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.compras_list.*
 import kotlinx.android.synthetic.main.compras_list.view.*
+import kotlinx.android.synthetic.main.compras_list.view.tv_valor_subtotal
 import kotlinx.android.synthetic.main.item_carrito.view.*
 import kotlinx.android.synthetic.main.item_producto.view.iv_producto
 import kotlinx.android.synthetic.main.item_producto.view.tv_nombre
@@ -22,7 +24,7 @@ class ComprasRVAdapter(
 
     val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     val myRef: DatabaseReference = database.getReference("compras")
-
+    var idConteo: String? = ""
 
     //3
     override fun onCreateViewHolder(
@@ -57,15 +59,12 @@ class ComprasRVAdapter(
 
         holder.itemView.iv_eliminar.setOnClickListener {
             eliminarCompra(compra.id)
+            restarConteo()
         }
 
-        subTotalAcumulado()
 
-        /*var sub = 0L
-        sub = subTotalAcumulado()
-        if(holder.itemView.tv_valor_subtotal.text != null) {
-            holder.itemView.tv_valor_subtotal.text = "$".plus("$sub")
-        }*/
+
+
     }
 
     //2
@@ -103,23 +102,40 @@ class ComprasRVAdapter(
         myRef.child(compra.id!!).updateChildren(childUpdate)
     }
 
-    private fun subTotalAcumulado() : Long {
-        val myRef: DatabaseReference = database.getReference("compras")
-        var acumulado = 0L
+    private fun restarConteo() {
 
-        val postListener = object : ValueEventListener {
+        val myRef: DatabaseReference = database.getReference("conteocompras")
+        var compraExiste = false
+        var contadorAct = 0
+        val postListener2 = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (datasnapshot: DataSnapshot in snapshot.children) {
-                    val compra = datasnapshot.getValue(Compras::class.java)
-                    acumulado += compra!!.precio
+                    val conteo = datasnapshot.getValue(Conteo::class.java)
+                    if (snapshot.exists()) {
+                        compraExiste = true
+                        idConteo = conteo?.id
+                        contadorAct = conteo?.cont!!
+                    }
                 }
-                Log.d("valor","$acumulado")
+                if (!compraExiste) {
+                    val id = myRef.push().key
+                    val conteo = Conteo(
+                        id,
+                        1
+                    )
+                    myRef.child(id!!).setValue(conteo)
+                } else {
+                    val childUpdate = HashMap<String, Any>()
+
+                    childUpdate["cont"] = contadorAct - 1
+                    myRef.child(idConteo!!).updateChildren(childUpdate)
+                    Log.d("contador firebase", contadorAct.toString())
+
+                }
             }
         }
-        myRef.addListenerForSingleValueEvent(postListener)
-        return acumulado
+        myRef.addListenerForSingleValueEvent(postListener2)
     }
-
 
 }

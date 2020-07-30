@@ -1,11 +1,13 @@
 package com.example.practica3.ui.list.perros
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practica3.R
 import com.example.practica3.ui.model.Compras
+import com.example.practica3.ui.model.Conteo
 import com.example.practica3.ui.model.Perros
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
@@ -15,7 +17,9 @@ class PerrosRVAdapter(
     var perrosList: ArrayList<Perros>
 ) : RecyclerView.Adapter<PerrosRVAdapter.PerrosViewHolder>() {
 
+    val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     var idCompra: String? = ""
+    var idConteo: String? = ""
     var cant = 0
 
     override fun onCreateViewHolder(
@@ -36,8 +40,7 @@ class PerrosRVAdapter(
         val perro: Perros = perrosList[position]
         holder.bindPerro(perro)
         holder.itemView.bt_anadir.setOnClickListener {
-            //Log.d("bien", hamburguesa.nombre)
-            crearCompraEnBaseDeDatos(perro.nombre, perro.precio, perro.url)
+            crearCompra(perro)
         }
 
     }
@@ -53,13 +56,8 @@ class PerrosRVAdapter(
         }
     }
 
-    private fun crearCompraEnBaseDeDatos(
-        nombre: String,
-        precio: Long,
-        url: String
-    ) {
+    private fun crearCompra(perro: Perros) {
 
-        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
         val myRef: DatabaseReference = database.getReference("compras")
         var compraExiste = false
 
@@ -69,7 +67,7 @@ class PerrosRVAdapter(
                 //Log.d("data",snapshot.toString())
                 for (datasnapshot: DataSnapshot in snapshot.children) {
                     val compra = datasnapshot.getValue(Compras::class.java)
-                    if (compra?.nombre == nombre) {
+                    if (compra?.nombre == perro.nombre) {
                         compraExiste = true
                         idCompra = compra.id
                         cant = compra.cantidad
@@ -80,21 +78,52 @@ class PerrosRVAdapter(
 
                     val compra = Compras(
                         id,
-                        nombre,
-                        precio,
-                        precio,
-                        url,
+                        perro.nombre,
+                        perro.precio,
+                        perro.precio,
+                        perro.url,
                         1
                     )
-                    if (id != null) {
-                        myRef.child(id).setValue(compra)
-                    }
+                    myRef.child(id!!).setValue(compra)
+                    sumarConteo()
+
                 } else {
                     val childUpdate = HashMap<String, Any>()
                     childUpdate["cantidad"] = cant + 1
-                    childUpdate["precio"] = precio * (cant + 1)
-
+                    childUpdate["precio"] = perro.precio * (cant + 1)
                     myRef.child(idCompra!!).updateChildren(childUpdate)
+                }
+            }
+        }
+        myRef.addListenerForSingleValueEvent(postListener)
+    }
+
+    private fun sumarConteo() {
+
+        val myRef: DatabaseReference = database.getReference("conteocompras")
+        var compraExiste = false
+        var contadorAct = 0
+
+        val postListener = object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {}
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (datasnapshot: DataSnapshot in snapshot.children) {
+                    val conteo = datasnapshot.getValue(Conteo::class.java)
+                    if (snapshot.exists()) {
+                        compraExiste = true
+                        idConteo = conteo?.id
+                        contadorAct = conteo?.cont!!
+                    }
+                }
+                if (!compraExiste) {
+                    val id = myRef.push().key
+                    val conteo = Conteo(id, 1)
+                    myRef.child(id!!).setValue(conteo)
+                } else {
+                    val childUpdate = HashMap<String, Any>()
+                    childUpdate["cont"] = contadorAct + 1
+                    myRef.child(idConteo!!).updateChildren(childUpdate)
+                    Log.d("contador firebase", contadorAct.toString())
                 }
             }
         }

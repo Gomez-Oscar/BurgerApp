@@ -50,12 +50,21 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/tv_peso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/peso"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
             android:id="@+id/tv_valor_subtotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="@string/precio_mexicana"
+            android:text="@string/precio_cero"
             android:textColor="@color/black"
             android:textSize="18sp" />
 

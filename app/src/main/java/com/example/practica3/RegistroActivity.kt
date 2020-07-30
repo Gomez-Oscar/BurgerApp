@@ -48,7 +48,7 @@ class RegistroActivity : AppCompatActivity() {
             } else if (direccion.isEmpty() || direccion.isBlank()) {
                 showMessage("Ingrese  una dirección")
 
-            }  else if (email.isEmpty() || email.isBlank()) {
+            } else if (email.isEmpty() || email.isBlank()) {
                 showMessage("Ingrese un correo electrónico")
 
             } else if (password.isEmpty() || password.isBlank()) {
@@ -116,6 +116,7 @@ class RegistroActivity : AppCompatActivity() {
         val database: FirebaseDatabase = FirebaseDatabase.getInstance()
         val myRef: DatabaseReference = database.getReference("usuarios")
         val id = myRef.push().key
+
 
         val usuario = Usuario(
             id,

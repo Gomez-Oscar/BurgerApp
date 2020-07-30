@@ -54,6 +54,7 @@
     <string name="label_login">INICIAR SESIÓN</string>
     <string name="label_crear_cuenta">CREAR CUENTA</string>
     <string name="label_restablecer_password">RECUPERAR PASSWORD</string>
+    <string name="label_final">COMPRA EXITOSA</string>
 
     <string name="info_home">Este es el fragmento encargado de darle la bienvenida al usuario, en este el usuario se puede dirigir a menu o a tracking</string>
     <string name="info_tracking">Se realizara el tracking de los pedidos utilizando un codigo de seguimiento</string>
@@ -70,7 +71,6 @@
     <string name="info_editar">El usuario puede editar sus datos</string>
 
     <string name="continuar">CONTINUAR</string>
-    <string name="finalizar">FINALIZAR PEDIDO</string>
     <string name="cambiar_direccion">CAMBIAR DIRECCIÓN</string>
 
     <string name="mexicana">PAPAS A LA FRANCESA</string>
@@ -89,12 +89,27 @@
     <string name="menu_bebidas">Bebidas</string>
     <string name="cantidad">Cantidad</string>
     <string name="numero">15</string>
-    <string name="peso">$</string>
-    <string name="subtotal">Subtotal:</string>
     <string name="carrito_vacio">Tu carrito de compras está vacío</string>
+    <string name="info_pago">Información de Pago</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="domicilio">Domicilio:</string>
+    <string name="total">Total:</string>
+    <string name="metodo">Método de Servicio</string>
+    <string name="domi">Entrega a Domicilio</string>
+    <string name="tienda">Recoger en Tienda</string>
+    <string name="mi_ubicacion">Mi Ubicación</string>
+    <string name="mi_tienda">Mi Tienda</string>
+    <string name="dir_tienda">Calle 41 # 67 37</string>
+    <string name="ciudad_tienda">Rionegro, Antioquia</string>
+    <string name="metodo_pago">Método de Pago</string>
+    <string name="efectivo">Efectivo</string>
+    <string name="finalizar">FINALIZAR PEDIDO</string>
+    <string name="precio_cero">0</string>
+    <string name="peso">$</string>
 
-
-
-
+    <string name="mensaje_final">Tu pedido ha sido realizado exitosamente</string>
+    <string name="mensaje_domicilio">Llegara a tu domicilio en 30 minutos</string>
+    <string name="mensaje_recoger">Estará listo para ser recogido en 30 minutos</string>
+    <string name="continuar_comprando">Continua Comprando</string>
 
 </resources>

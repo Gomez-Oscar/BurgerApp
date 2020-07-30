@@ -1,5 +1,6 @@
 package com.example.practica3.ui.list.complementos
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.practica3.R
 import com.example.practica3.ui.model.Complementos
 import com.example.practica3.ui.model.Compras
+import com.example.practica3.ui.model.Conteo
 import com.google.firebase.database.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_producto.view.*
@@ -15,7 +17,9 @@ class ComplementosRVAdapter(
     var complementosList: ArrayList<Complementos>
 ) : RecyclerView.Adapter<ComplementosRVAdapter.ComplementosViewHolder>() {
 
+    val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     var idCompra: String? = ""
+    var idConteo: String? = ""
     var cant = 0
 
     override fun onCreateViewHolder(
@@ -36,8 +40,7 @@ class ComplementosRVAdapter(
         val complemento: Complementos = complementosList[position]
         holder.bindComplemento(complemento)
         holder.itemView.bt_anadir.setOnClickListener {
-            //Log.d("bien", hamburguesa.nombre)
-            crearCompraEnBaseDeDatos(complemento.nombre, complemento.precio, complemento.url)
+            crearCompra(complemento)
         }
     }
 
@@ -52,23 +55,17 @@ class ComplementosRVAdapter(
         }
     }
 
-    private fun crearCompraEnBaseDeDatos(
-        nombre: String,
-        precio: Long,
-        url: String
-    ) {
+    private fun crearCompra(complemento: Complementos) {
 
-        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
         val myRef: DatabaseReference = database.getReference("compras")
         var compraExiste = false
 
         val postListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
             override fun onDataChange(snapshot: DataSnapshot) {
-                //Log.d("data",snapshot.toString())
                 for (datasnapshot: DataSnapshot in snapshot.children) {
                     val compra = datasnapshot.getValue(Compras::class.java)
-                    if (compra?.nombre == nombre) {
+                    if (compra?.nombre == complemento.nombre) {
                         compraExiste = true
                         idCompra = compra.id
                         cant = compra.cantidad
@@ -79,21 +76,52 @@ class ComplementosRVAdapter(
 
                     val compra = Compras(
                         id,
-                        nombre,
-                        precio,
-                        precio,
-                        url,
+                        complemento.nombre,
+                        complemento.precio,
+                        complemento.precio,
+                        complemento.url,
                         1
                     )
-                    if (id != null) {
-                        myRef.child(id).setValue(compra)
-                    }
+                    myRef.child(id!!).setValue(compra)
+                    sumarConteo()
+
                 } else {
                     val childUpdate = HashMap<String, Any>()
                     childUpdate["cantidad"] = cant + 1
-                    childUpdate["precio"] = precio * (cant + 1)
-
+                    childUpdate["precio"] = complemento.precio * (cant + 1)
                     myRef.child(idCompra!!).updateChildren(childUpdate)
+                }
+            }
+        }
+        myRef.addListenerForSingleValueEvent(postListener)
+    }
+
+    private fun sumarConteo() {
+
+        val myRef: DatabaseReference = database.getReference("conteocompras")
+        var compraExiste = false
+        var contadorAct = 0
+
+        val postListener = object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {}
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (datasnapshot: DataSnapshot in snapshot.children) {
+                    val conteo = datasnapshot.getValue(Conteo::class.java)
+                    if (snapshot.exists()) {
+                        compraExiste = true
+                        idConteo = conteo?.id
+                        contadorAct = conteo?.cont!!
+                    }
+                }
+                if (!compraExiste) {
+                    val id = myRef.push().key
+                    val conteo = Conteo(id, 1)
+                    myRef.child(id!!).setValue(conteo)
+                } else {
+                    val childUpdate = HashMap<String, Any>()
+                    childUpdate["cont"] = contadorAct + 1
+                    myRef.child(idConteo!!).updateChildren(childUpdate)
+                    Log.d("contador firebase", contadorAct.toString())
                 }
             }
         }

@@ -38,25 +38,20 @@ class ListHamburguesas : Fragment() {
 
         hamburguesasRVAdapter =
             HamburguesasRVAdapter(
-                hamburguesasList as ArrayList<Hamburguesas>
-            )
+                hamburguesasList as ArrayList<Hamburguesas>)
         rv_hamburguesas.adapter = hamburguesasRVAdapter//se setea el adapter al recicler view
 
         cargarhamburguesas()
 
-
-
-
     }
 
     private fun cargarhamburguesas(){
+
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("hamburguesas")
-        //hamburguesasList.clear()
         val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (datasnapshot: DataSnapshot in snapshot.children) {
-                    //Log.d("data",snapshot.toString())
                     val hamburguesa = datasnapshot.getValue(Hamburguesas::class.java)
                         hamburguesasList.add(hamburguesa!!)
                 }
@@ -68,18 +63,4 @@ class ListHamburguesas : Fragment() {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
